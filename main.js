@@ -21,7 +21,7 @@ const map = new maplibregl.Map({
   center: [138.9525, 35.0236],
   zoom: 0,
   minZoom: 0,
-  maxZoom: 9,
+  maxZoom: 12,
   pitch: 0,
   maxPitch: 85,
   bearing: 0,
@@ -88,64 +88,6 @@ map.on("load", () => {
   // 標高タイルセット
   map.setTerrain({ source: "dem-tiles", exaggeration: 1 });
 
-  /*
-  // 段彩図レイヤー
-  map.addLayer({
-    id: "dem-relief",
-    type: "color-relief",
-    source: "dem-tiles",
-    paint: {
-      "color-relief-color": [
-        "interpolate",
-        ["linear"],
-        ["elevation"],
-        -2000,
-        "rgb(0,0,50)",
-        -1000,
-        "rgb(0,0,101)",
-        -500,
-        "rgb(0,0,152)",
-        -200,
-        "rgb(0,0,203)",
-        -100,
-        "rgb(0,0,255)",
-        -50,
-        "rgb(50,50,255)",
-        -20,
-        "rgb(101,101,255)",
-        -10,
-        "rgb(153,153,255)",
-        -5,
-        "rgb(204,204,255)",
-        0,
-        "rgb(0, 152, 0)",
-        5,
-        "rgb(50, 203, 0)",
-        10,
-        "rgb(101, 203, 0)",
-        20,
-        "rgb(127, 255, 0)",
-        50,
-        "rgb(191, 255, 0)",
-        100,
-        "rgb(255, 255, 0)",
-        200,
-        "rgb(255, 191, 0)",
-        500,
-        "rgb(255, 127, 0)",
-        1000,
-        "rgb(255, 101, 50)",
-        2000,
-        "rgb(255, 63, 0)",
-        3000,
-        "rgb(255, 50, 50)",
-        4000,
-        "rgb(255, 0, 0)",
-      ],
-      "color-relief-opacity": 0.6,
-    },
-  });
-  */
   // 段彩図レイヤー（深海強調）
   map.addLayer({
     id: "dem-relief",
@@ -214,19 +156,6 @@ map.on("load", () => {
       "color-relief-opacity": 0.85,
     },
   });
-
-  /*
-  // 陰影起伏図レイヤー
-  map.addLayer({
-    id: "hillshade",
-    type: "hillshade",
-    source: "dem-tiles",
-    minzoom: 1,
-    maxzoom: 18,
-    layout: { visibility: "visible" },
-    paint: { "hillshade-shadow-color": "rgba(0,0,0,0.3)" },
-  });
-  */
 
   // 陰影起伏図レイヤー（彩色と調和させる）
   map.addLayer({
@@ -297,7 +226,7 @@ map.on("load", () => {
     "source-layer": "contours",
     paint: {
       "line-color": "rgba(0,0,0, 50%)",
-      "line-width": ["match", ["get", "level"], 1, 1, 0.5],
+      "line-width": ["match", ["get", "level"], 1, 1.2, 0.5],
     },
   });
 
@@ -310,9 +239,9 @@ map.on("load", () => {
     filter: [">", ["get", "level"], 0],
     layout: {
       "symbol-placement": "line",
-      "text-size": 12,
+      "text-size": 13,
       "text-field": ["concat", ["number-format", ["get", "ele"], {}], "'"],
-      "text-font": ["Noto Sans Regular"],
+      "text-font": ["Noto Sans CJK JP Bold"],
     },
     paint: {
       "text-halo-color": "white",
@@ -356,12 +285,8 @@ map.on("load", () => {
     source: "islands",
     layout: {
       "text-field": ["get", "島名"],
-      "text-font": [
-        "Noto Sans Regular",
-        "Noto Sans CJK JP Regular",
-        "Arial Unicode MS Regular",
-      ],
-      "text-size": 11,
+      "text-font": ["Noto Sans CJK JP Bold"],
+      "text-size": 13,
       "text-offset": [0, 0.8],
       "text-anchor": "top",
       "text-allow-overlap": false, // 重なり抑制（必要に応じてtrue）
@@ -394,12 +319,8 @@ map.on("load", () => {
     source: "undersea",
     layout: {
       "text-field": ["get", "海底地形名"],
-      "text-font": [
-        "Noto Sans Regular",
-        "Noto Sans CJK JP Regular",
-        "Arial Unicode MS Regular",
-      ],
-      "text-size": 11,
+      "text-font": ["Noto Sans CJK JP Bold"],
+      "text-size": 13,
       "text-offset": [0, 0.8],
       "text-anchor": "top",
       "text-allow-overlap": false,
@@ -413,10 +334,10 @@ map.on("load", () => {
   });
 
   // ズームに応じてラベル表示を調整
-  map.setLayerZoomRange("islands-label", 4, 10);
-  map.setLayerZoomRange("undersea-label", 4, 10);
-  map.setLayerZoomRange("islands-point", 4, 10);
-  map.setLayerZoomRange("undersea-point", 4, 10);
+  map.setLayerZoomRange("islands-label", 4, 15);
+  map.setLayerZoomRange("undersea-label", 4, 15);
+  map.setLayerZoomRange("islands-point", 4, 15);
+  map.setLayerZoomRange("undersea-point", 4, 15);
 });
 
 // 地図の中心座標と標高を表示
