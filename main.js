@@ -19,7 +19,7 @@ const map = new maplibregl.Map({
   style: "https://tile.openstreetmap.jp/styles/maptiler-basic-ja/style.json",
   // style: './basic.json',
   center: [138.9525, 35.0236],
-  zoom: 1,
+  zoom: 0,
   minZoom: 0,
   maxZoom: 9,
   pitch: 0,
@@ -289,41 +289,7 @@ map.on("load", () => {
     maxzoom: 9,
   });
 
-  /*
   // 等深線レイヤー
-  map.addLayer({
-    id: "contour-lines",
-    type: "line",
-    source: "contour-source",
-    "source-layer": "contours",
-    paint: {
-      "line-color": "rgba(0, 0, 0, 0.5)",
-      "line-width": ["match", ["get", "level"], 1, 1.5, 0.5],
-    },
-  });
-
-  // 等深線ラベル
-  map.addLayer({
-    id: "contour-labels",
-    type: "symbol",
-    source: "contour-source",
-    "source-layer": "contours",
-    layout: {
-      "symbol-placement": "line-center",
-      "text-size": 14,
-      "text-field": ["concat", ["number-format", ["get", "ele"], {}], "m"],
-      "text-font": ["Noto Sans Regular"],
-      // "text-font": ["NotoSansJP-Regular"],
-      "text-rotation-alignment": "map",
-      "text-keep-upright": true,
-    },
-    paint: {
-      "text-color": "white",
-      "text-halo-color": "black",
-      "text-halo-width": 1,
-    },
-  });
-  */
   map.addLayer({
     id: "contour-lines",
     type: "line",
@@ -334,6 +300,8 @@ map.on("load", () => {
       "line-width": ["match", ["get", "level"], 1, 1, 0.5],
     },
   });
+
+  // 等深線ラベル
   map.addLayer({
     id: "contour-labels",
     type: "symbol",
@@ -342,15 +310,107 @@ map.on("load", () => {
     filter: [">", ["get", "level"], 0],
     layout: {
       "symbol-placement": "line",
-      "text-size": 11,
+      "text-size": 12,
       "text-field": ["concat", ["number-format", ["get", "ele"], {}], "'"],
-      "text-font": ["Noto Sans Bold"],
+      "text-font": ["Noto Sans Regular"],
     },
     paint: {
       "text-halo-color": "white",
       "text-halo-width": 1,
     },
   });
+
+  map.addSource("islands", {
+    type: "geojson",
+    data: "./data/island_point.geojson",
+  });
+
+  map.addSource("undersea", {
+    type: "geojson",
+    data: "./data/undersea-features_point.geojson",
+  });
+
+  // 島ポイント記号
+  map.addLayer({
+    id: "islands-point",
+    type: "circle",
+    source: "islands",
+    paint: {
+      "circle-radius": 3,
+      "circle-color": "#1e90ff",
+      "circle-stroke-color": "#ffffff",
+      "circle-stroke-width": 1,
+    },
+  });
+
+  // 島名ラベル
+  map.addLayer({
+    id: "islands-label",
+    type: "symbol",
+    source: "islands",
+    layout: {
+      "text-field": ["get", "島名"],
+      "text-font": [
+        "Noto Sans Regular",
+        "Noto Sans CJK JP Regular",
+        "Arial Unicode MS Regular",
+      ],
+      "text-size": 11,
+      "text-offset": [0, 0.8],
+      "text-anchor": "top",
+      "text-allow-overlap": false, // 重なり抑制（必要に応じてtrue）
+      "symbol-z-order": "auto",
+    },
+    paint: {
+      "text-color": "#0b2239",
+      "text-halo-color": "#ffffff",
+      "text-halo-width": 1.2,
+    },
+  });
+
+  // 海底地形ポイント記号
+  map.addLayer({
+    id: "undersea-point",
+    type: "circle",
+    source: "undersea",
+    paint: {
+      "circle-radius": 3,
+      "circle-color": "#c0392b",
+      "circle-stroke-color": "#ffffff",
+      "circle-stroke-width": 1,
+    },
+  });
+
+  // 海底地形名ラベル
+  map.addLayer({
+    id: "undersea-label",
+    type: "symbol",
+    source: "undersea",
+    layout: {
+      "text-field": ["get", "海底地形名"],
+      "text-font": [
+        "Noto Sans Regular",
+        "Noto Sans CJK JP Regular",
+        "Arial Unicode MS Regular",
+      ],
+      "text-size": 11,
+      "text-offset": [0, 0.8],
+      "text-anchor": "top",
+      "text-allow-overlap": false,
+      "symbol-z-order": "auto",
+    },
+    paint: {
+      "text-color": "#1a1a1a",
+      "text-halo-color": "#ffffff",
+      "text-halo-width": 1.2,
+    },
+  });
+
+  // ズームに応じてラベル表示を調整
+  map.setLayerZoomRange("islands-label", 4, 9);
+  map.setLayerZoomRange("undersea-label", 4, 9);
+  map.setLayerZoomRange("islands-point", 4, 9);
+  map.setLayerZoomRange("undersea-point", 4, 9);
 });
 
 // 地図の中心座標と標高を表示
