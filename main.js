@@ -320,6 +320,7 @@ map.on("load", () => {
     },
   });
 
+  // 島ポイントソース
   map.addSource("islands", {
     type: "geojson",
     data: "./data/island_point.geojson",
@@ -327,6 +328,7 @@ map.on("load", () => {
       '<a href="https://portal.msil.go.jp/">海上保安庁 海しるAPI</a>',
   });
 
+  // 海底地形名ポイントソース
   map.addSource("undersea", {
     type: "geojson",
     data: "./data/undersea-features_point.geojson",
@@ -334,20 +336,20 @@ map.on("load", () => {
       '<a href="https://portal.msil.go.jp/">海上保安庁 海しるAPI</a>',
   });
 
-  // 島ポイント記号
+  // 島ポイントレイヤー
   map.addLayer({
     id: "islands-point",
     type: "circle",
     source: "islands",
     paint: {
-      "circle-radius": 3,
+      "circle-radius": 4,
       "circle-color": "#1e90ff",
       "circle-stroke-color": "#ffffff",
       "circle-stroke-width": 1,
     },
   });
 
-  // 島名ラベル
+  // 島名ラベルレイヤー
   map.addLayer({
     id: "islands-label",
     type: "symbol",
@@ -372,20 +374,20 @@ map.on("load", () => {
     },
   });
 
-  // 海底地形ポイント記号
+  // 海底地形ポイントレイヤー
   map.addLayer({
     id: "undersea-point",
     type: "circle",
     source: "undersea",
     paint: {
-      "circle-radius": 3,
+      "circle-radius": 4,
       "circle-color": "#c0392b",
       "circle-stroke-color": "#ffffff",
       "circle-stroke-width": 1,
     },
   });
 
-  // 海底地形名ラベル
+  // 海底地形名ラベルレイヤー
   map.addLayer({
     id: "undersea-label",
     type: "symbol",
@@ -411,10 +413,10 @@ map.on("load", () => {
   });
 
   // ズームに応じてラベル表示を調整
-  map.setLayerZoomRange("islands-label", 4, 9);
-  map.setLayerZoomRange("undersea-label", 4, 9);
-  map.setLayerZoomRange("islands-point", 4, 9);
-  map.setLayerZoomRange("undersea-point", 4, 9);
+  map.setLayerZoomRange("islands-label", 4, 10);
+  map.setLayerZoomRange("undersea-label", 4, 10);
+  map.setLayerZoomRange("islands-point", 4, 10);
+  map.setLayerZoomRange("undersea-point", 4, 10);
 });
 
 // 地図の中心座標と標高を表示
