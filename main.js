@@ -58,7 +58,7 @@ map.addControl(
   new maplibregl.AttributionControl({
     compact: true,
     customAttribution:
-      '<a href="https://twitter.com/shi__works" target="_blank">X(旧Twitter)</a> | <a href="https://github.com/shiwaku/depth-contour-map-on-maplibre">GitHub</a>',
+      '<a href="https://twitter.com/shi__works" target="_blank">X(旧Twitter)</a> | <a href="https://github.com/shiwaku/gebco-2025-grid-tile-map-on-maplibre">GitHub</a>',
   })
 );
 
@@ -323,11 +323,15 @@ map.on("load", () => {
   map.addSource("islands", {
     type: "geojson",
     data: "./data/island_point.geojson",
+    attribution:
+      '<a href="https://portal.msil.go.jp/">海上保安庁 海しるAPI</a>',
   });
 
   map.addSource("undersea", {
     type: "geojson",
     data: "./data/undersea-features_point.geojson",
+    attribution:
+      '<a href="https://portal.msil.go.jp/">海上保安庁 海しるAPI</a>',
   });
 
   // 島ポイント記号
