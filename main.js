@@ -66,7 +66,7 @@ map.addControl(
 map.addControl(
   new maplibregl.TerrainControl({
     source: "dem-tiles",
-    exaggeration: 4, // 標高を強調する倍率
+    exaggeration: 1, // 標高を強調する倍率
   })
 );
 
