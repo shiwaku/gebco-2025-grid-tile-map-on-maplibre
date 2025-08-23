@@ -43,7 +43,7 @@ rio rgbify -b -10000 -i 0.1 \
   --co BIGTIFF=YES --co TILED=YES --co COMPRESS=DEFLATE --co PREDICTOR=2 --co ZLEVEL=9
 ```
 
-## ラスタータイル生成
+## ラスタータイル作成
 
 ```
 gdal2tiles.py gebco_2025_sub_ice_3857_terrainrgb.tif gebco_2025_sub_ice_3857_terrainrgb -z0-9 --resampling=near --xyz --processes=6
