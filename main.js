@@ -78,7 +78,7 @@ map.on("load", () => {
   map.addSource("dem-tiles", {
     type: "raster-dem",
     tiles: [
-      "https://shiworks2.xsrv.jp/raster-tiles/gebco/gebco_2025 grid_tile_terrain-rgb/{z}/{x}/{y}.png",
+      "https://shiworks2.xsrv.jp/raster-tiles/gebco/gebco_2025_grid_tile_terrain-rgb/{z}/{x}/{y}.png",
     ],
     attribution:
       '<a href="https://www.gebco.net/data-products/gridded-bathymetry-data">GEBCO 2025 Grid (sub-ice topo/bathy)を加工して作成</a>',
