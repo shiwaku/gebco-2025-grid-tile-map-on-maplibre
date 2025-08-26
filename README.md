@@ -52,7 +52,7 @@ gdal2tiles.py gebco_2025_sub_ice_3857_terrainrgb.tif gebco_2025 grid_tile_terrai
 ## タイル URL
 
 ```
-https://shiworks2.xsrv.jp/raster-tiles/gebco/gebco_2025 grid_tile_terrain-rgb/{z}/{x}/{y}.png
+https://shiworks2.xsrv.jp/raster-tiles/gebco/gebco_2025_grid_tile_terrain-rgb/{z}/{x}/{y}.png
 ```
 
 - ズームレベル：0 ～ 9
