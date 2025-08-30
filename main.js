@@ -252,7 +252,7 @@ map.on("load", () => {
   // 島ポイントソース
   map.addSource("islands", {
     type: "geojson",
-    data: "https://shiwaku.github.io/msil-api-data-get/geojson/islands.geojson",
+    data: "https://shiwaku.github.io/msil-api-geojson-get/geojson/islands.geojson",
     attribution:
       '<a href="https://portal.msil.go.jp/">海上保安庁 海しるAPI</a>',
   });
@@ -260,7 +260,7 @@ map.on("load", () => {
   // 海底地形名ポイントソース
   map.addSource("undersea", {
     type: "geojson",
-    data: "https://shiwaku.github.io/msil-api-data-get/geojson/undersea_features.geojson",
+    data: "https://shiwaku.github.io/msil-api-geojson-get/geojson/undersea_features.geojson",
     attribution:
       '<a href="https://portal.msil.go.jp/">海上保安庁 海しるAPI</a>',
   });
