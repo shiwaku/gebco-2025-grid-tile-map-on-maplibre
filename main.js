@@ -18,8 +18,8 @@ const map = new maplibregl.Map({
   container: "map",
   style: "https://tile.openstreetmap.jp/styles/maptiler-basic-ja/style.json",
   // style: './basic.json',
-  center: [138.9525, 35.0236],
-  zoom: 0,
+  center: [138.884, 34.74],
+  zoom: 6.82,
   minZoom: 0,
   maxZoom: 12,
   pitch: 0,
@@ -240,7 +240,7 @@ map.on("load", () => {
     layout: {
       "symbol-placement": "line",
       "text-size": 13,
-      "text-field": ["concat", ["number-format", ["get", "ele"], {}], "'"],
+      "text-field": ["concat", ["number-format", ["get", "ele"], {}], "m"],
       "text-font": ["Noto Sans CJK JP Bold"],
     },
     paint: {
