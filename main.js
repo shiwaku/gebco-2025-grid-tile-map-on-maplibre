@@ -176,7 +176,7 @@ map.on("load", () => {
 
   // 標高タイルソース
   const demSource = new mlcontour.DemSource({
-    url: "https://shiworks2.xsrv.jp/raster-tiles/gebco/gebco_2025 grid_tile_terrain-rgb/{z}/{x}/{y}.png",
+    url: "https://shiworks2.xsrv.jp/raster-tiles/gebco/gebco_2025_grid_tile_terrain-rgb/{z}/{x}/{y}.png",
     encoding: "mapbox",
     minzoom: 0,
     maxzoom: 9,
